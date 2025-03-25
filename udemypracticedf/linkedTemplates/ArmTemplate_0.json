@@ -438,11 +438,11 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"sink_folder_name": {
-													"value": "@item().sink_folder_name",
+													"value": "@item().p_sink_folder",
 													"type": "Expression"
 												},
 												"sink_file_name": {
-													"value": "@item().sink_file_name",
+													"value": "@item().p_sink_file",
 													"type": "Expression"
 												}
 											}
