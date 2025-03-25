@@ -426,7 +426,7 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"p_ref_url": {
-													"value": "@item().p_ref_url",
+													"value": "@item().p_rel_url",
 													"type": "Expression"
 												}
 											}
