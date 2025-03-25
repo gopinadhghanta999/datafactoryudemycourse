@@ -8,6 +8,9 @@
 		"datalakels_accountKey": {
 			"value": ""
 		},
+		"Httplinkedservice_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com"
+		},
 		"datalakels_properties_typeProperties_url": {
 			"value": "https://datalakesynapsee.dfs.core.windows.net/"
 		},
