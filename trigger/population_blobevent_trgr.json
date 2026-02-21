@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "population_copysrc_rawgen2",
+					"referenceName": "01_population_copysrc_rawgen2",
 					"type": "PipelineReference"
 				}
 			}
