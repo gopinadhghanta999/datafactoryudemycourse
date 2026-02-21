@@ -1,0 +1,27 @@
+{
+	"name": "moving_archive",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_population",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat('population_', formatDateTime(utcNow(),'yyyyMMddHHmmss'), '.tsv.gz')",
+					"type": "Expression"
+				},
+				"folderPath": "archive",
+				"container": "population"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
