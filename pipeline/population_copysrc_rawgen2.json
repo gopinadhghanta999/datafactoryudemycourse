@@ -69,7 +69,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals(activity('Get Metadata file').output.columnCount,13)",
+						"value": "@or(\n    equals(activity('Get Metadata file').output.columnCount,13),\n    greater(activity('Get Metadata file').output.size, 1048576)\n    )",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
