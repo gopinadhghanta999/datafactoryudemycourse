@@ -1,5 +1,5 @@
 {
-	"name": "event_trgr",
+	"name": "population_blobevent_trgr",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
@@ -13,10 +13,10 @@
 		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/datasets/blobs/invoice/",
-			"blobPathEndsWith": ".parquet",
+			"blobPathBeginsWith": "/population/blobs/",
+			"blobPathEndsWith": ".tsv",
 			"ignoreEmptyBlobs": true,
-			"scope": "/subscriptions/df68a351-a694-49f2-9102-37ace059da49/resourceGroups/first-resource/providers/Microsoft.Storage/storageAccounts/firstsadlsgen",
+			"scope": "/subscriptions/df68a351-a694-49f2-9102-37ace059da49/resourceGroups/first-resource/providers/Microsoft.Storage/storageAccounts/firstblobb1",
 			"events": [
 				"Microsoft.Storage.BlobCreated"
 			]
