@@ -1,11 +1,18 @@
 {
-	"name": "pipeline2",
+	"name": "population_copysrc_rawgen2",
 	"properties": {
 		"activities": [
 			{
 				"name": "Copy population",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "check if file exists",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -59,6 +66,21 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "check if file exists",
+				"type": "Validation",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_population_src",
+						"type": "DatasetReference"
+					},
+					"timeout": "0.00:00:30",
+					"sleep": 10,
+					"minimumSize": 1024
+				}
 			}
 		],
 		"annotations": [],
