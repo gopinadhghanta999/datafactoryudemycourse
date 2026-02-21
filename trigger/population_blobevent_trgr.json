@@ -14,7 +14,7 @@
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
 			"blobPathBeginsWith": "/population/blobs/",
-			"blobPathEndsWith": ".tsv",
+			"blobPathEndsWith": ".gz",
 			"ignoreEmptyBlobs": true,
 			"scope": "/subscriptions/df68a351-a694-49f2-9102-37ace059da49/resourceGroups/first-resource/providers/Microsoft.Storage/storageAccounts/firstblobb1",
 			"events": [
