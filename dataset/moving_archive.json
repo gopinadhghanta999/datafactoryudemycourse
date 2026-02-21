@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "@concat('population_', formatDateTime(utcNow(),'yyyyMMddHHmmss'), '.tsv')",
+					"value": "population_@{formatDateTime(utcnow(),'yyyyMMddHHmmss')}.tsv.gz",
 					"type": "Expression"
 				},
 				"folderPath": "archive",
