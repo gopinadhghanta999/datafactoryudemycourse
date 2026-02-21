@@ -1,0 +1,9 @@
+{
+	"name": "datafactorygitpulling",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "3f00391a-f555-4c22-bffa-b584f8a7ed85",
+		"tenantId": "9483a0eb-3c67-411e-ae71-b9dcdff5be89"
+	}
+}
