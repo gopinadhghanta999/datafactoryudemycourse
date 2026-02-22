@@ -1,0 +1,132 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "datafactorygitpulling"
+		},
+		"adls_ls_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'adls_ls'"
+		},
+		"datalakels_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'datalakels'"
+		},
+		"datalakesyanpse_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'datalakesyanpse'"
+		},
+		"ls_population_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_population'"
+		},
+		"Httplinkedservice_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().src_baseurl}"
+		},
+		"adls_ls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://firstsadlsgen.dfs.core.windows.net/"
+		},
+		"datalakels_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalakesynapsee.dfs.core.windows.net/"
+		},
+		"datalakesyanpse_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://synapsedl1.dfs.core.windows.net/"
+		},
+		"latest_vault_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://tetsingvault.vault.azure.net/"
+		},
+		"population_blobevent_trgr_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/df68a351-a694-49f2-9102-37ace059da49/resourceGroups/first-resource/providers/Microsoft.Storage/storageAccounts/firstblobb1"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "datafactorygitpulling_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"adls_ls_accountKey": {
+						"value": "[parameters('adls_ls_accountKey')]"
+					},
+					"datalakels_accountKey": {
+						"value": "[parameters('datalakels_accountKey')]"
+					},
+					"datalakesyanpse_accountKey": {
+						"value": "[parameters('datalakesyanpse_accountKey')]"
+					},
+					"ls_population_connectionString": {
+						"value": "[parameters('ls_population_connectionString')]"
+					},
+					"Httplinkedservice_properties_typeProperties_url": {
+						"value": "[parameters('Httplinkedservice_properties_typeProperties_url')]"
+					},
+					"adls_ls_properties_typeProperties_url": {
+						"value": "[parameters('adls_ls_properties_typeProperties_url')]"
+					},
+					"datalakels_properties_typeProperties_url": {
+						"value": "[parameters('datalakels_properties_typeProperties_url')]"
+					},
+					"datalakesyanpse_properties_typeProperties_url": {
+						"value": "[parameters('datalakesyanpse_properties_typeProperties_url')]"
+					},
+					"latest_vault_properties_typeProperties_baseUrl": {
+						"value": "[parameters('latest_vault_properties_typeProperties_baseUrl')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "datafactorygitpulling_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"population_blobevent_trgr_properties_typeProperties_scope": {
+						"value": "[parameters('population_blobevent_trgr_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'datafactorygitpulling_ArmTemplate_0')]"
+			]
+		}
+	]
+}

@@ -1,0 +1,45 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "datafactorygitpulling"
+		},
+		"adls_ls_accountKey": {
+			"value": ""
+		},
+		"datalakels_accountKey": {
+			"value": ""
+		},
+		"datalakesyanpse_accountKey": {
+			"value": ""
+		},
+		"ls_population_connectionString": {
+			"value": ""
+		},
+		"Httplinkedservice_properties_typeProperties_url": {
+			"value": "@{linkedService().src_baseurl}"
+		},
+		"adls_ls_properties_typeProperties_url": {
+			"value": "https://firstsadlsgen.dfs.core.windows.net/"
+		},
+		"datalakels_properties_typeProperties_url": {
+			"value": "https://datalakesynapsee.dfs.core.windows.net/"
+		},
+		"datalakesyanpse_properties_typeProperties_url": {
+			"value": "https://synapsedl1.dfs.core.windows.net/"
+		},
+		"latest_vault_properties_typeProperties_baseUrl": {
+			"value": "https://tetsingvault.vault.azure.net/"
+		},
+		"population_blobevent_trgr_properties_typeProperties_scope": {
+			"value": "/subscriptions/df68a351-a694-49f2-9102-37ace059da49/resourceGroups/first-resource/providers/Microsoft.Storage/storageAccounts/firstblobb1"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
