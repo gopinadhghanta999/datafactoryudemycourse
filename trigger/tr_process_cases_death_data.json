@@ -7,14 +7,22 @@
 		"typeProperties": {
 			"frequency": "Hour",
 			"interval": 24,
-			"startTime": "2026-02-23T12:00:00Z",
+			"startTime": "2026-02-23T00:00:00Z",
 			"endTime": "2026-02-28T19:42:00Z",
 			"delay": "00:00:00",
 			"maxConcurrency": 50,
 			"retryPolicy": {
 				"intervalInSeconds": 30
 			},
-			"dependsOn": []
+			"dependsOn": [
+				{
+					"type": "TumblingWindowTriggerDependencyReference",
+					"referenceTrigger": {
+						"referenceName": "tr_ingest_ecdc_data",
+						"type": "TriggerReference"
+					}
+				}
+			]
 		}
 	}
 }
