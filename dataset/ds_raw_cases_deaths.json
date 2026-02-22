@@ -1,5 +1,5 @@
 {
-	"name": "df_raw_cases_deaths",
+	"name": "ds_raw_cases_deaths",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adls_ls",
