@@ -17,6 +17,9 @@
 		"ls_population_connectionString": {
 			"value": ""
 		},
+		"ls_sql_database_password": {
+			"value": ""
+		},
 		"Httplinkedservice_properties_typeProperties_url": {
 			"value": "@{linkedService().src_baseurl}"
 		},
@@ -31,6 +34,15 @@
 		},
 		"latest_vault_properties_typeProperties_baseUrl": {
 			"value": "https://tetsingvault.vault.azure.net/"
+		},
+		"ls_sql_database_properties_typeProperties_server": {
+			"value": "sqlserverrr.database.windows.net"
+		},
+		"ls_sql_database_properties_typeProperties_database": {
+			"value": "sqlserver"
+		},
+		"ls_sql_database_properties_typeProperties_userName": {
+			"value": "sql"
 		},
 		"population_blobevent_trgr_properties_typeProperties_scope": {
 			"value": "/subscriptions/df68a351-a694-49f2-9102-37ace059da49/resourceGroups/first-resource/providers/Microsoft.Storage/storageAccounts/firstblobb1"

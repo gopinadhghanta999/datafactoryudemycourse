@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_population'"
 		},
+		"ls_sql_database_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_sql_database'"
+		},
 		"Httplinkedservice_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "@{linkedService().src_baseurl}"
@@ -42,6 +46,18 @@
 		"latest_vault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://tetsingvault.vault.azure.net/"
+		},
+		"ls_sql_database_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlserverrr.database.windows.net"
+		},
+		"ls_sql_database_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sqlserver"
+		},
+		"ls_sql_database_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sql"
 		},
 		"population_blobevent_trgr_properties_typeProperties_scope": {
 			"type": "string",
@@ -567,6 +583,80 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/02_df_hospital_admissions')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/05_copying_databasecases_death')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy to database",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"preCopyScript": "truncate table covid_reporting.cases_and_deaths",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_cases_death_processed_gen2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_sql_cases_death",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_cases_death_processed_gen2')]",
+				"[concat(variables('factoryId'), '/datasets/ds_sql_cases_death')]"
 			]
 		},
 		{
@@ -1515,7 +1605,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "ecdc/1/hospital_admissions_weekly",
+						"folderPath": "ecdc/hospital_admissions_weekly",
 						"fileSystem": "processed"
 					},
 					"columnDelimiter": ",",
@@ -1593,6 +1683,63 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/adls_ls')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_sql_cases_death')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_sql_database",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "country",
+						"type": "varchar"
+					},
+					{
+						"name": "country_code_2_digit",
+						"type": "varchar"
+					},
+					{
+						"name": "country_code_3_digit",
+						"type": "varchar"
+					},
+					{
+						"name": "population",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "cases_count",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "deaths_count",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "reported_date",
+						"type": "date"
+					},
+					{
+						"name": "source",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "covid_reporting",
+					"table": "cases_and_deaths"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_sql_database')]"
 			]
 		},
 		{
@@ -1871,6 +2018,28 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('ls_population_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_sql_database')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('ls_sql_database_properties_typeProperties_server')]",
+					"database": "[parameters('ls_sql_database_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('ls_sql_database_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('ls_sql_database_password')]"
+					}
 				}
 			},
 			"dependsOn": []

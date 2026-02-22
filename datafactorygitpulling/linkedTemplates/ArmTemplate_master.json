@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_population'"
 		},
+		"ls_sql_database_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_sql_database'"
+		},
 		"Httplinkedservice_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "@{linkedService().src_baseurl}"
@@ -42,6 +46,18 @@
 		"latest_vault_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://tetsingvault.vault.azure.net/"
+		},
+		"ls_sql_database_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlserverrr.database.windows.net"
+		},
+		"ls_sql_database_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sqlserver"
+		},
+		"ls_sql_database_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sql"
 		},
 		"population_blobevent_trgr_properties_typeProperties_scope": {
 			"type": "string",
@@ -86,6 +102,9 @@
 					"ls_population_connectionString": {
 						"value": "[parameters('ls_population_connectionString')]"
 					},
+					"ls_sql_database_password": {
+						"value": "[parameters('ls_sql_database_password')]"
+					},
 					"Httplinkedservice_properties_typeProperties_url": {
 						"value": "[parameters('Httplinkedservice_properties_typeProperties_url')]"
 					},
@@ -100,6 +119,15 @@
 					},
 					"latest_vault_properties_typeProperties_baseUrl": {
 						"value": "[parameters('latest_vault_properties_typeProperties_baseUrl')]"
+					},
+					"ls_sql_database_properties_typeProperties_server": {
+						"value": "[parameters('ls_sql_database_properties_typeProperties_server')]"
+					},
+					"ls_sql_database_properties_typeProperties_database": {
+						"value": "[parameters('ls_sql_database_properties_typeProperties_database')]"
+					},
+					"ls_sql_database_properties_typeProperties_userName": {
+						"value": "[parameters('ls_sql_database_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -118,6 +146,26 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'datafactorygitpulling_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "datafactorygitpulling_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"population_blobevent_trgr_properties_typeProperties_scope": {
 						"value": "[parameters('population_blobevent_trgr_properties_typeProperties_scope')]"
@@ -125,7 +173,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'datafactorygitpulling_ArmTemplate_0')]"
+				"[resourceId('Microsoft.Resources/deployments', 'datafactorygitpulling_ArmTemplate_1')]"
 			]
 		}
 	]
