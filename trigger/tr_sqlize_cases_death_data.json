@@ -2,7 +2,7 @@
 	"name": "tr_sqlize_cases_death_data",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
@@ -10,6 +10,7 @@
 				"frequency": "Hour",
 				"interval": 15,
 				"startTime": "2026-02-22T00:00:00",
+				"endTime": "2026-02-28T19:49:52",
 				"timeZone": "India Standard Time"
 			}
 		}
