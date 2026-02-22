@@ -1,0 +1,28 @@
+{
+	"name": "tr_sqlizee_cases_death_data",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"type": "TumblingWindowTrigger",
+		"typeProperties": {
+			"frequency": "Hour",
+			"interval": 24,
+			"startTime": "2026-02-23T00:00:00Z",
+			"endTime": "2026-02-28T19:50:00Z",
+			"delay": "00:00:00",
+			"maxConcurrency": 50,
+			"retryPolicy": {
+				"intervalInSeconds": 30
+			},
+			"dependsOn": [
+				{
+					"type": "TumblingWindowTriggerDependencyReference",
+					"referenceTrigger": {
+						"referenceName": "tr_process_cases_death_data",
+						"type": "TriggerReference"
+					}
+				}
+			]
+		}
+	}
+}
