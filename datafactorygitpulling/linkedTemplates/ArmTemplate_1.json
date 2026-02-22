@@ -1003,6 +1003,7 @@
 						"     skipDuplicateMapOutputs: true) ~> selectForSink",
 						"selectForSink sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
+						"     partitionFileNames:['cases_death.csv'],",
 						"     truncate: true,",
 						"     umask: 0022,",
 						"     preCommands: [],",
@@ -1011,7 +1012,8 @@
 						"     skipDuplicateMapOutputs: true,",
 						"     outputAssertFailedRows: true,",
 						"     assertFailure_fileSystem: 'logs',",
-						"     assertFailure_folderPath: 'dataflow_logs') ~> CaseAndDeathProcessed"
+						"     assertFailure_folderPath: 'dataflow_logs',",
+						"     partitionBy('hash', 1)) ~> CaseAndDeathProcessed"
 					]
 				}
 			},
