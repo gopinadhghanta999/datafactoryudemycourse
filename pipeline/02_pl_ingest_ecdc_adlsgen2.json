@@ -1,5 +1,5 @@
 {
-	"name": "02_pl_ingest_cases_death_adlsgen2",
+	"name": "02_pl_ingest_ecdc_adlsgen2",
 	"properties": {
 		"activities": [
 			{
