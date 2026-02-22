@@ -1,9 +1,12 @@
 {
-	"name": "ds_testing_db",
+	"name": "ds_sql_testing_db",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_sql_database",
 			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "sqlize"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",

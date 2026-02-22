@@ -5,6 +5,9 @@
 			"referenceName": "Httplinkedservice",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "older_datasets"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {

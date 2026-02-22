@@ -5,6 +5,9 @@
 			"referenceName": "datalakesyanpse",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "older_datasets"
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {

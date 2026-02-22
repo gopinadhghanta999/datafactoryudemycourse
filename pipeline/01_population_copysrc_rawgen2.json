@@ -48,6 +48,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -251,6 +252,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "raw"
+		},
 		"annotations": [],
 		"lastPublishTime": "2026-02-20T18:26:59Z"
 	},

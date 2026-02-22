@@ -5,6 +5,9 @@
 			"referenceName": "adls_ls",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "older_datasets"
+		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {

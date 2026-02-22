@@ -60,6 +60,9 @@
 				]
 			}
 		],
+		"folder": {
+			"name": "old_youtube"
+		},
 		"annotations": []
 	}
 }

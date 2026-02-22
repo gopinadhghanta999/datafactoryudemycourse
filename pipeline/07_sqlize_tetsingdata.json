@@ -174,12 +174,15 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_testing_db",
+						"referenceName": "ds_sql_testing_db",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
+		"folder": {
+			"name": "sqlize"
+		},
 		"annotations": []
 	}
 }
