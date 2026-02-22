@@ -3,10 +3,19 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Httplinkedservice",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"src_baseurl": {
+					"value": "@dataset().src_baseurl_ds",
+					"type": "Expression"
+				}
+			}
 		},
 		"parameters": {
 			"relative_url": {
+				"type": "string"
+			},
+			"src_baseurl_ds": {
 				"type": "string"
 			}
 		},
