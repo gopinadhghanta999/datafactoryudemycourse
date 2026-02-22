@@ -1,5 +1,5 @@
 {
-	"name": "ds_ecdc_cases_death_dl",
+	"name": "ds_ecdc_raw_target_dl",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adls_ls",
