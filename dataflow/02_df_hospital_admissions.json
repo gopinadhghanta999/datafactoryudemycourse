@@ -1,5 +1,5 @@
 {
-	"name": "02_df_hospital_admissions_",
+	"name": "02_df_hospital_admissions",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -127,11 +127,11 @@
 				"          country,",
 				"          indicator,",
 				"          source,",
-				"          each(match(name == 'date'),",
-				"               'reported' + '_date' = $$),",
-				"          each(match(name == 'year_week'),",
-				"               'reported' + '_year_week' = $$),",
-				"          value",
+				"          value,",
+				"          each(match(name=='date'),",
+				"               'reported'+'_date' = $$),",
+				"          each(match(name=='year_week'),",
+				"               'reported'+'_year_week' = $$)",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectingRequiredFields",
@@ -218,18 +218,22 @@
 				"     skipDuplicateMapOutputs: true) ~> selectingDaily",
 				"selectingReqcolsWeekly sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     partitionFileNames:['hospital_admissions_weekly'],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> Weeklysink",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> Weeklysink",
 				"selectingDaily sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     partitionFileNames:['hospital_admissions_daily'],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> Dailysink"
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> Dailysink"
 			]
 		}
 	}
