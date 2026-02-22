@@ -1,9 +1,9 @@
 {
-	"name": "05_sqlize_databasecases_death",
+	"name": "06_sqlize_hospital_admissions_daily",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy to database",
+				"name": "Copy hospital Admissions daily",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -29,10 +29,8 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "truncate table covid_reporting.cases_and_deaths",
 						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false,
-						"disableMetricsCollection": false
+						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -46,13 +44,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_cases_death_processed_gen2",
+						"referenceName": "ds_processed_hospital_admissions_daily_gen2",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_sql_cases_death",
+						"referenceName": "ds_sqlize_hospital_admissions_daily",
 						"type": "DatasetReference"
 					}
 				]
